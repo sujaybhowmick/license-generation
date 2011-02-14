@@ -5,5 +5,5 @@ Building with Gnu getopt java library
 3. Use the following command to add the gnu getopt library to your local Maven repository
 
 
-$mvn install:install-file -Dfile=$HOME/licesne-generation/dependencies/java-getopt-1.0.13.jar \
+$mvn install:install-file -Dfile=<your project working folder>/dependencies/java-getopt-1.0.13.jar \
   -DgroupId=gnu.getopt -DartifactId=gnu-getopt -Dversion=1.0.13 -Dpackaging=jar -DlocalRepositoryPath=$HOME/.m2/repository
