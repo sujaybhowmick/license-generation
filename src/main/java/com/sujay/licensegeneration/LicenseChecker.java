@@ -21,7 +21,7 @@ import java.util.Map;
  * @author sujay
  */
 public class LicenseChecker {
-
+    final static String SUBJECT = "License Generation";
     private static Map<String, String> options = new HashMap<String, String>(0);
 
     private void verifyLicense() {
@@ -33,7 +33,7 @@ public class LicenseChecker {
         try {
             KeyStoreParam keyStoreParam = new KeyStoreParamImpl(keyStore, alias, storepass, null);
             CipherParam cipherParam = new CipherParamImpl(keypass);
-            LicenseParam licenseParam = new LicenseParamImpl("License Generation", keyStoreParam, cipherParam);
+            LicenseParam licenseParam = new LicenseParamImpl(SUBJECT, keyStoreParam, cipherParam);
             LicenseManager lm = new LicenseManager(licenseParam);            
             
             if (install) {
@@ -56,6 +56,7 @@ public class LicenseChecker {
             System.exit(0);
         }
         if (options.size() < 4) {
+            System.out.println("Printing Help:" + options.size());
             printHelp();
             System.exit(0);
         }
@@ -67,15 +68,16 @@ public class LicenseChecker {
     static void parseOptions(String cmd, String[] args) {
         int c;
         String arg;
-        LongOpt[] longOpts = new LongOpt[5];
+        LongOpt[] longOpts = new LongOpt[6];
         longOpts[0] = new LongOpt("alias", LongOpt.REQUIRED_ARGUMENT, null, 'a');
         longOpts[1] = new LongOpt("storepass", LongOpt.REQUIRED_ARGUMENT, null, 's');
         longOpts[2] = new LongOpt("keypass", LongOpt.REQUIRED_ARGUMENT, null, 'k');
         longOpts[3] = new LongOpt("keystore", LongOpt.REQUIRED_ARGUMENT, null, 'l');
-        longOpts[4] = new LongOpt("help", LongOpt.NO_ARGUMENT, null, 'h');
+        longOpts[4] = new LongOpt("install", LongOpt.OPTIONAL_ARGUMENT, null, 'i');
+        longOpts[5] = new LongOpt("help", LongOpt.NO_ARGUMENT, null, 'h');
 
 
-        Getopt g = new Getopt("license-check", args, "a:s:k:l:i:h");
+        Getopt g = new Getopt("LicenseChecker", args, "a:s:k:l:i:h", longOpts);
         g.setOpterr(true);
 
         while ((c = g.getopt()) != -1) {
@@ -120,6 +122,6 @@ public class LicenseChecker {
     }
 
     static void printHelp() {
-        System.out.println("USEAGE:java com.sujay.LicenseChecker [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--keystore=<key store file location>][--help]");
+        System.out.println("USEAGE:java com.sujay.LicenseChecker [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--keystore=<key store file location>] [--install <true/false>] [--help]");
     }
 }

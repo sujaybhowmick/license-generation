@@ -17,12 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Generate new license.
- *
- * @author Manohar Viswanathan
+ * 
+ * @author sujay
  */
 public class GenerateLicense {
-    final static String SUBJECT = "License Generation for EagleIntellignece Application";
+    final static String SUBJECT = "License Generation";
     static Map<String, String> options = new HashMap<String, String>(0);
     public static void main(String[] args) throws Exception {
         parseOptions("license-gen", args);
@@ -44,7 +43,7 @@ public class GenerateLicense {
 
         final CipherParam cipherParam = new CipherParamImpl(keypass);
 
-        LicenseParam licenseParam = new LicenseParamImpl("License Generation", privateKeyStoreParam, cipherParam);
+        LicenseParam licenseParam = new LicenseParamImpl(SUBJECT, privateKeyStoreParam, cipherParam);
 
         System.out.print("Creating new license ...");
         LicenseManager lm = new LicenseManager(licenseParam);
@@ -62,9 +61,9 @@ public class GenerateLicense {
      */
     static LicenseContent createLicenseContent(LicenseParam licenseParam) {
         LicenseContent result = new LicenseContent();
-        X500Principal holder = new X500Principal("CN=XYZ Software Inc");
+        X500Principal holder = new X500Principal("CN=Sujay Bhowmick");
         result.setHolder(holder);
-        X500Principal issuer = new X500Principal("CN=Manohar");
+        X500Principal issuer = new X500Principal("CN=sujay");
         result.setIssuer(issuer);
         result.setConsumerAmount(1);
         result.setConsumerType("User");
@@ -142,6 +141,6 @@ public class GenerateLicense {
     }
 
     static void printHelp(){
-        System.out.println("USEAGE:java com.sujay.GenerateLicesne [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--years=<validity in years e.g. 2>] [--keystore=<key store file location>][--help]");
+        System.out.println("USEAGE:java com.sujay.GenerateLicesne [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--days=<validity in days e.g. 2>] [--keystore=<key store file location>][--help]");
     }
 }
