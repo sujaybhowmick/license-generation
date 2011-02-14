@@ -90,7 +90,7 @@ public class GenerateLicense {
         longOpts[3] = new LongOpt("days", LongOpt.REQUIRED_ARGUMENT, null, 'd');
         longOpts[4] = new LongOpt("keystore", LongOpt.REQUIRED_ARGUMENT, null, 'l');
         longOpts[5] = new LongOpt("help", LongOpt.NO_ARGUMENT, null, 'h');
-        Getopt g = new Getopt("getoptexample", args, "a:s:k:d:l:h", longOpts);
+        Getopt g = new Getopt("LicenseGenerator", args, "a:s:k:d:l:h", longOpts);
         g.setOpterr(true);
         
         while ((c = g.getopt()) != -1) {
