@@ -73,8 +73,8 @@ public class GenerateLicense {
         result.setIssued(now);
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
-        // set validity for 1 hour
-        cal.add(Calendar.YEAR, Integer.parseInt(options.get("validupto")));
+        // set validity for days
+        cal.add(Calendar.DATE, Integer.parseInt(options.get("validupto")));
         result.setNotAfter(cal.getTime());
         result.setSubject(licenseParam.getSubject());
         return result;
@@ -87,7 +87,7 @@ public class GenerateLicense {
         longOpts[0] = new LongOpt("alias", LongOpt.REQUIRED_ARGUMENT, null, 'a');
         longOpts[1] = new LongOpt("storepass", LongOpt.REQUIRED_ARGUMENT, null, 's');
         longOpts[2] = new LongOpt("keypass", LongOpt.REQUIRED_ARGUMENT, null, 'k');
-        longOpts[3] = new LongOpt("years", LongOpt.REQUIRED_ARGUMENT, null, 'd');
+        longOpts[3] = new LongOpt("days", LongOpt.REQUIRED_ARGUMENT, null, 'd');
         longOpts[4] = new LongOpt("keystore", LongOpt.REQUIRED_ARGUMENT, null, 'l');
         longOpts[5] = new LongOpt("help", LongOpt.NO_ARGUMENT, null, 'h');
         Getopt g = new Getopt("getoptexample", args, "a:s:k:d:l:h", longOpts);
