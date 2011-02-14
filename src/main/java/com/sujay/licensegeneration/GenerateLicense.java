@@ -141,6 +141,6 @@ public class GenerateLicense {
     }
 
     static void printHelp(){
-        System.out.println("USEAGE:java com.sujay.GenerateLicesne [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--days=<validity in days e.g. 2>] [--keystore=<key store file location>][--help]");
+        System.out.println("USEAGE:java com.sujay.licesnegeneration.GenerateLicesne [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--days=<validity in days e.g. 2>] [--keystore=<key store file location>][--help]");
     }
 }
