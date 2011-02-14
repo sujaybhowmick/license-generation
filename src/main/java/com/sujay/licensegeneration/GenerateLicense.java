@@ -67,7 +67,7 @@ public class GenerateLicense {
         result.setIssuer(issuer);
         result.setConsumerAmount(1);
         result.setConsumerType("User");
-        result.setInfo("This Application demonstrates uses TrueLicense and Aspects for license management");
+        result.setInfo("License Management using True License");
         Date now = new Date();
         result.setIssued(now);
         Calendar cal = Calendar.getInstance();
