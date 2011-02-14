@@ -73,7 +73,13 @@ public class GenerateLicense {
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
         // set validity for days
-        cal.add(Calendar.DATE, Integer.parseInt(options.get("validupto")));
+        cal.add(Calendar.DATE, Integer.parseInt(options.get("days")));
+        String hours = options.get("hours");
+        String mins = options.get("mins");
+        int intHours = hours == null ? 0 : Integer.parseInt(hours);
+        int intMins = mins == null ? 0 : Integer.parseInt(mins);
+        cal.add(Calendar.HOUR, intHours > 24 ? 0 : intHours);
+        cal.add(Calendar.MINUTE, intMins > 60 ? 0 : intMins);
         result.setNotAfter(cal.getTime());
         result.setSubject(licenseParam.getSubject());
         return result;
@@ -82,13 +88,15 @@ public class GenerateLicense {
     static void parseOptions(String cmd, String[] args) {
         int c;
         String arg;
-        LongOpt[] longOpts = new LongOpt[6];
+        LongOpt[] longOpts = new LongOpt[8];
         longOpts[0] = new LongOpt("alias", LongOpt.REQUIRED_ARGUMENT, null, 'a');
         longOpts[1] = new LongOpt("storepass", LongOpt.REQUIRED_ARGUMENT, null, 's');
         longOpts[2] = new LongOpt("keypass", LongOpt.REQUIRED_ARGUMENT, null, 'k');
         longOpts[3] = new LongOpt("days", LongOpt.REQUIRED_ARGUMENT, null, 'd');
-        longOpts[4] = new LongOpt("keystore", LongOpt.REQUIRED_ARGUMENT, null, 'l');
-        longOpts[5] = new LongOpt("help", LongOpt.NO_ARGUMENT, null, 'h');
+        longOpts[4] = new LongOpt("hours", LongOpt.OPTIONAL_ARGUMENT, null, 'h');
+        longOpts[5] = new LongOpt("mins", LongOpt.OPTIONAL_ARGUMENT, null, 'm');
+        longOpts[6] = new LongOpt("keystore", LongOpt.REQUIRED_ARGUMENT, null, 'l');
+        longOpts[7] = new LongOpt("help", LongOpt.NO_ARGUMENT, null, 'e');
         Getopt g = new Getopt("LicenseGenerator", args, "a:s:k:d:l:h", longOpts);
         g.setOpterr(true);
         
@@ -119,15 +127,38 @@ public class GenerateLicense {
                        System.exit(1);
                     }
                     
-                    options.put("validupto", arg);
+                    options.put("days", arg);
                     break;
 
+              case 'h':
+                    arg = g.getOptarg();
+                    try{
+                        Integer.parseInt(arg);
+                    }catch(NumberFormatException e){
+                        printHelp();
+                       System.exit(1);
+                    }
+                    options.put("hours", arg);
+                    break;
+
+            case 'm':
+                    arg = g.getOptarg();
+                    try{
+                        Integer.parseInt(arg);
+                    }catch(NumberFormatException e){
+                        printHelp();
+                       System.exit(1);
+                    }
+
+                    options.put("mins", arg);
+                    break;
+                    
                case 'l':
                     arg = g.getOptarg();
                     options.put("keystore", arg);
                     break;
 
-               case 'h':
+               case 'e':
                     printHelp();
                     System.exit(1);
                     break;
@@ -141,6 +172,6 @@ public class GenerateLicense {
     }
 
     static void printHelp(){
-        System.out.println("USEAGE:java com.sujay.licesnegeneration.GenerateLicesne [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--days=<validity in days e.g. 2>] [--keystore=<key store file location>][--help]");
+        System.out.println("USEAGE:java com.sujay.licesnegeneration.GenerateLicesne [--alias=<alias>] [--storepass=<store password>] [--keypass=<keypassword>] [--days=<validity in days e.g. 2>] [--hours=<validatiy in hours e.g. 2>][--mins=<validity in mins e.g. 10>][--keystore=<key store file location>][--help]");
     }
 }
