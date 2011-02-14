@@ -21,23 +21,23 @@ How to generate Private and Public keys using keytool
 
 How to generate license file
 -----------------------------------------------------------
-  1. Download the binary distribution license-generation-bin.tar.gz/license-generation-bin.tar.zip
-  2. Unzip the license-generation-bin.tar.gz     
+  1. Download the binary distribution license-generation-bin.tar.gz/license-generation-bin.zip
+  2. Unzip the license-generation-bin.tar.gz/zip     
   3. Copy the privateKeys.store and publicKeys.store to license-generation-bin folder
   4. Now cd into the license-generation-bin and execute the following command for generating the license.lic file
 
-     java -cp .:lib/* com.sujay.licensegeneration.GenerateLicense --alias=privatekey --storepass=storepass@12 --keypass=keypass@12 --days=1 \
-      --keystore=privateKeys.store
-
+     java -cp .:lib/* com.sujay.licensegeneration.GenerateLicense --alias=privatekey \
+	  --storepass=storepass@12 --keypass=keypass@12 --days=1 --keystore=privateKeys.store
+  
   5. To check the license validity execute the following command
 
-    java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey --storepass=storepass@12 --keypass=keypass@12 \
-      --keystore=publicKeys.store --install=true
+    java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey \
+	  --storepass=storepass@12 --keypass=keypass@12 --keystore=publicKeys.store --install=true
 
   6. Once license is install you can just drop the --install argument to just verify the validity of license
 
-    java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey --storepass=storepass@12 --keypass=keypass@12 \
-      --keystore=publicKeys.store
+    java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey \
+	  --storepass=storepass@12 --keypass=keypass@12 --keystore=publicKeys.store
 
 
  
