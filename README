@@ -1,9 +1,43 @@
-Building with Gnu getopt java library 
-----------------------------------------
-1.To build license-generation project sucessfully you will need gnu getopt java library. This library is packaged in dependencies folder
-2. The license-generation project uses Maven build system. You will need to install gnu getopt library to your local Maven repository
-3. Use the following command to add the gnu getopt library to your local Maven repository
+How to build license-generation project 
+-----------------------------------------------------------
+  1. To build license-generation project sucessfully you will need gnu getopt java library. This library is packaged in dependencies folder
+  2. The license-generation project uses Maven build system. You will need to install gnu getopt library to your local Maven repository
+  3. Use the following command to add the gnu getopt library to your local Maven repository
+
+    mvn install:install-file -Dfile=<your project working folder>/dependencies/java-getopt-1.0.13.jar \
+    -DgroupId=gnu.getopt -DartifactId=gnu-getopt -Dversion=1.0.13 -Dpackaging=jar -DlocalRepositoryPath=$HOME/.m2/repository
+
+How to generate Private and Public keys using keytool
+-----------------------------------------------------------
+  1. To Generating private key execute the command below
+
+    keytool -genkey -alias privatekey -keystore privateKeys.store
+
+  2. To Generating public key execute the two commands below
+    
+    keytool --export -alias privatekey -file certfile.cer -keystore privateKeys.store
+
+    keytool --import -alias publickey -file certfile.cer -keystore publicKeys.store
+
+How to generate license file
+-----------------------------------------------------------
+  1. Download the binary distribution license-generation-bin.tar.gz/license-generation-bin.tar.zip
+  2. Unzip the license-generation-bin.tar.gz     
+  3. Copy the privateKeys.store and publicKeys.store to license-generation-bin folder
+  4. Now cd into the license-generation-bin and execute the following command for generating the license.lic file
+
+     java -cp .:lib/* com.sujay.licensegeneration.GenerateLicense --alias=privatekey --storepass=storepass@12 --keypass=keypass@12 --days=1 \
+      --keystore=privateKeys.store
+
+  5. To check the license validity execute the following command
+
+    java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey --storepass=storepass@12 --keypass=keypass@12 \
+      --keystore=publicKeys.store --install=true
+
+  6. Once license is install you can just drop the --install argument to just verify the validity of license
+
+    java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey --storepass=storepass@12 --keypass=keypass@12 \
+      --keystore=publicKeys.store
 
 
-$mvn install:install-file -Dfile=<your project working folder>/dependencies/java-getopt-1.0.13.jar \
-  -DgroupId=gnu.getopt -DartifactId=gnu-getopt -Dversion=1.0.13 -Dpackaging=jar -DlocalRepositoryPath=$HOME/.m2/repository
+ 
