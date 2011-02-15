@@ -27,14 +27,14 @@ How to generate license file
   4. Now cd into the license-generation-bin and execute the following command for generating the license.lic file
 
      java -cp .:lib/* com.sujay.licensegeneration.GenerateLicense --alias=privatekey \
-	  --storepass=storepass@12 --keypass=keypass@12 --days=1 --keystore=privateKeys.store
+	  --storepass=storepass@12 --keypass=keypass@12 --days=1 --hours=0 --mins=0 --keystore=privateKeys.store
   
   5. To check the license validity execute the following command
 
     java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey \
 	  --storepass=storepass@12 --keypass=keypass@12 --keystore=publicKeys.store --install=true
 
-  6. Once license is install you can just drop the --install argument to just verify the validity of license
+  6. Once license is installed you can just drop the --install argument to just verify the validity of license
 
     java -cp .:lib/* com.sujay.licensegeneration.LicenseChecker --alias=publickey \
 	  --storepass=storepass@12 --keypass=keypass@12 --keystore=publicKeys.store
