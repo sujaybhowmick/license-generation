@@ -31,12 +31,12 @@
         <dependency>
             <groupId>de.schlichtherle.truelicense</groupId>
             <artifactId>truelicense-core</artifactId>
-            <version>1.31-SNAPSHOT</version>
+            <version>1.33</version>
         </dependency>
         <dependency>
             <groupId>de.schlichtherle.truelicense</groupId>
             <artifactId>truelicense-xml</artifactId>
-            <version>1.31-SNAPSHOT</version>
+            <version>1.33</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>gnu.getopt</groupId>
-            <artifactId>gnu-getopt</artifactId>
+            <artifactId>java-getopt</artifactId>
             <version>1.0.13</version>
         </dependency>
     </dependencies>
